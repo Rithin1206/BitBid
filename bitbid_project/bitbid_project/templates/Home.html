@@ -1,0 +1,27 @@
+{% extends 'base.html' %} 
+{% load socialaccount %}
+
+<!DOCTYPE html>
+
+
+{% block content %}
+<header class="hero-section">
+  <div class="hero-text-container">
+    <h1>Auction<br />Website.</h1>
+    <p>You have just found the easiest online auction platform to use<br />
+    </p>
+    <a href='#move'><button>Know More</button></a>
+  </div>
+  <div class="hero-img-container">
+    <img src="../static/images/bidhome.png" alt="" />
+  </div>
+</header>
+<section class="clt-section" id="move">
+  <h1>Sign up to find out more<br />
+    about what we do.</h1>
+  <a href='{% provider_login_url 'google' method='oauth2' %}'><button>Sign Up</button></a>
+</section>
+{% endblock content %}
+   
+    
+

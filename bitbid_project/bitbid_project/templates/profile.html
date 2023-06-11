@@ -1,0 +1,87 @@
+{% extends 'base.html' %} 
+
+<!DOCTYPE html>
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/css/seller.css">
+</head>
+    <div class="container">
+        <h1 class="thick">Profile</h1>
+        <div class="row">
+            <div class="col-lg-12 mb-4 mb-sm-5">
+                <div class="card card-style1 border-0">
+                    <div class="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6 mb-4 mb-lg-0">
+                                {% if pro.profile_picture %}
+                                    <div class="px-0">
+                                        <img src = "data:image/png;base64,{{ pro.profile_picture.decode }}" class="rounded img-fluid" alt="Profile Image">
+                                    </div>
+                                {% else %}
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="...">
+                                {% endif %}
+
+                            </div>
+                            <div class="col-lg-6 px-xl-10">
+                                <div class="bg-secondary  rounded display-block">
+                                    <h3 class="h2 text-white mb-g0">{{pro.user.username}}</h3>
+                                    <div class="text-title-type">{{pro.user_type}}</div>
+                                </div>
+                                <ul class="list-unstyled mb-1-9">
+                                   <!--- <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600">User Type:</div> {{pro.user_type}}</li>-->
+                                    <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600">First Name</div>{{pro.user.first_name}}</li>
+                                    <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600">Last Name</div>{{pro.user.last_name}}</li>
+                                    <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600">Email:</div>{{pro.user.email}}</li>
+                                    <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600">Wallet Balance: </div>{{pro.wallet.balance}}</li>
+                                    <a href='addMoney'><input type="button" value="Add Money" style="background-color: #363636;"></a>
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    {% if bids.count > 0 %}
+        <h3 style="text-align: center;">My Bids</h3>
+    {%endif%}
+    <br>
+    <div class="row" >
+        {% for bid in bids %} 
+          <div class="column">
+            <div class="card">  
+              <ul class="list-unstyled mb-1-9">
+                {% if bid.item.item_image %}
+                <li class="mb-2 mb-xl-3 display-28">
+                <div class="px-0" alt="Item Image">
+                        <img src = "data:image/png;base64,{{ bid.item.item_image.decode }}" class="rounded img-fluid bitbidimage">
+                </div>
+            </li>
+                {% endif %}
+                  <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600"><b>Item Name: </b>{{bid.item.name}}</div> </li>
+                 <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600"><b>Description: </b>{{bid.item.description}}</div></li>
+                  <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600"><b>Base Amount: </b>{{bid.item.base_amount}}</div></li>
+                  <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600"><b>Increment Amount: </b> {{bid.item.increment_amount}}</div></li>
+                  <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600"><b>Seller: </b>{{bid.item.seller.user.username}}</div></li>
+                  {% if bid.item.highest_bidder.user.username %}
+                    <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600"><b>Highest Bidder:  </b>{{bid.item.highest_bidder.user.username}}</div></li>
+                    <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600"><b>Highest Bid: </b> {{bid.item.highest_bid}}</div></li>
+                  {% else %}
+                    <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600"><b>Highest Bidder:  - </b></div></li>
+                    <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600"><b>Highest Bid:  - </b></div></li>
+                  {%endif%}
+                  <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600"><b>Start Date: </b>{{bid.item.start_date}}</div></li>
+                  <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600"><b>End Date: </b>{{bid.item.end_date}}</div></li>
+                  <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600"><b> Status: </b>{{bid.item.status}}</div></li>
+              </ul>
+              
+          </div>
+        </div> 
+        {% endfor %}
+      </div>
+{% endblock content %}

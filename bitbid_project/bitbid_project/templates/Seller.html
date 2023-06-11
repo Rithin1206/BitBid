@@ -1,0 +1,55 @@
+{% extends 'base.html' %} 
+
+<!DOCTYPE html>
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>Seller</title>
+    <link rel="stylesheet" href="../static/css/sell.css">
+</head>
+
+<h2 class="head" align="center">SELLER</h2>
+<a href='newItem'><button class="butt">Create New Item</button></a>
+<br/>
+<br/>
+<div class="row">
+    {% for item in Items %}   
+    <div class="column">
+      <div class="card">
+        <ul class="list-unstyled mb-1-9">
+          {% if item.item_image %}
+            <li class="mb-2 mb-xl-3 display-28">
+                <div class="px-0" alt="Item Image">
+                        <img src = "data:image/png;base64,{{ item.item_image.decode }}" class="rounded img-fluid bitbidimage">
+                </div>
+            </li>
+            {% endif %}
+            <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600" align="left"><b>Item Name:</b> {{item.name}}</div> </li>
+           <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600" align="left"><b>Description: </b>{{item.description}}</div></li>
+
+
+      
+            <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600" align="left"><b>Item value: </b> {{item.item_value}}</div></li>
+            <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600" align="left"><b>Base Amount: </b>{{item.base_amount}}</div></li>
+            <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600" align="left"><b>Increment Amount: </b>{{item.increment_amount}}</div></li>
+            <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600" align="left"><b>Seller: </b>{{item.seller.user.username}}</div></li>
+            {% if item.highest_bidder.user.username %}
+              <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600" align="left"><b>Highest Bidder: </b> {{item.highest_bidder.user.username}}</div></li>
+              <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600" align="left"><b>Highest Bid: </b> {{item.highest_bid}}</div></li>
+            {% else %}
+              <li class="mb-2 mb-xl-3 display-28"><div class=" display-26 text-secondary me-2 font-weight-600" align="left"><b>Highest Bidder:</b>  - </div></li>
+              <li class="mb-2 mb-xl-3 display-28"><div class=" display-26 text-secondary me-2 font-weight-600" align="left"><b>Highest Bid:</b>  - </div></li>
+              
+            {%endif%}
+            <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600" align="left"><b>Start Date:</b> {{item.start_date}}</div></li>
+            <li class="mb-2 mb-xl-3 display-28"><div class=" display-26 text-secondary me-2 font-weight-600" align="left"><b>End Date:</b> {{item.end_date}}</div></li>
+            <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600" align="center"><b>  {{item.status}}</b></div></li>
+        </ul>
+      </div>
+    </br>
+    </br>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

@@ -1,0 +1,60 @@
+{% extends 'base.html' %} 
+
+<!DOCTYPE html>
+
+
+
+{% block content %}
+{% load static %}
+<head>
+  <meta charset="UTF-8">
+  <title>Bid here</title>
+  <link rel="stylesheet" href="{% static 'css/buyer_item_popup.css' %}">
+  <script src="{% static 'buyer_item_popup.js' %}" defer></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+    var increment= {{item.increment_amount}}
+    var base={{item.base_amount}}
+    var highest_bid= {{item.highest_bid}}
+  </script>
+</head>
+
+
+  <div align="center">
+  {% if item.item_image %}
+                        <img src = "data:image/png;base64,{{ item.item_image.decode }}" class="rounded img-fluid" style= "max-width: 20%; ">
+            {% endif %}
+          </div>       
+<div   class="buyer-popup card center">
+    <ul class="list-unstyled mb-1-9 center">
+        <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600"><b>Item Name: </b> {{item.name}}</div> </li>
+       <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600"><b>Description: </b>{{item.description}}</div></li>
+        <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600"><b>Base Amount: </b>{{item.base_amount}}</div></li>
+        <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600"><b>Increment Amount: </b> {{item.increment_amount}}</div></li>
+        <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600"><b>Seller: </b>{{item.seller.user.username}}</div></li>
+        <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600"><b>Highest Bid: </b> {{item.highest_bid}}</div></li>
+        <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600"><b>Highest Bidder:  </b>{{item.highest_bidder.user.username}}</div></li>
+        <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600"><b>Start Date: </b>{{item.start_date}}</div></li>
+        <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600"><b>End Date: </b>{{item.end_date}}</div></li>  
+      </ul>
+      <form class="input-container" action="/newBid/{{item.id}}/" method="post" enctype="multipart/form-data">{% csrf_token %}
+        <div class="step-container">
+          <button class="minus">&#10134</button>
+          <input type="number" step="0.01" style="width:10vw; font-size: 16px" class="input-bid" name="newBid" readonly/>
+          <button class="plus">&#10133</button>
+        </div>
+       <div align="center"> 
+      <input type="submit" style= "background-color: hsl(256, 26%, 20%); border: none;
+      height:50%;
+      color: white;
+      padding:16px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px" class=" submit-bid btt third" value="Submit Bid">
+       </div>
+      </form>
+</div>
+  
+{% endblock content %}

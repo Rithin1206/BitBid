@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <title>Bit bid : : UserType</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+ 
+        <link rel="stylesheet" href="../static/css/style1.css">
+        <link href="https://fonts.googleapis.com/css?family=Concert+One|Oswald|Quicksand&display=swap" rel="stylesheet">
+    </head>
+
+
+<body>
+    <div class="container">
+        <div class="contact-box">
+        
+              <div class="center">
+                <h2>
+                    {% if user.is_authenticated %}
+                      <p>Welcome, You are logged in as {{ user.username }}</p>
+                    {% endif %}
+                    </h2>
+                <!-- <form action="" method="post">{% csrf_token %}
+                <h2>Bid or sell now</h2>
+                <input type="text" class="field" placeholder="User Name" name="un" required>
+                <input type="password" class="field" placeholder="Your Password" name="pa" required>
+                <select name="usertype" id="type" class="field">
+                    <option value="seller">seller</option>
+                    <option value="buyer">buyer</option>
+                  </select>
+                <br/>
+                <input type="submit" class="btn" value="Get Started" name="login"> -->
+                <form action="/User" class="field" style="width: 500px;
+                height:210px;" enctype="multipart/form-data" method="post">
+                    {% csrf_token %}
+                    <h2>Bid or sell now</h2>
+                    {{ form }}
+                    <br/>
+                    {% if message %}
+                    <script>
+                        alert('{{ message }}');
+                    </script>
+                    {% endif %}
+                    <input type="submit" class="btn" value="Get Started" name="login">
+                </form>
+                
+            </form>
+        </div>
+         
+        </div>            
+    </div>
+</body> 
+</html>

@@ -1,0 +1,80 @@
+table {
+    background-color: 18px solid hsl(255, 40%, 90%)
+  }
+#td{
+    border-radius: 4px;
+}
+
+h2.thick {
+    font-weight: bold;
+    margin-right:5% ;
+    text-align: center;
+    color:#270e49
+  }
+h1.thick {
+    font-weight: bold;
+    margin-right:10% ;
+    text-align: center;
+    color:#270e49
+  }
+a.button{
+    margin-left: 50%;
+}
+
+textarea {
+    width: 80%;
+    height: 100px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+  }
+input[type=text],input[type=number] {
+    width: 80%; 
+    padding: 12px 20px;
+    margin: 5px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+  }
+input[type=textarea],input[type=number]:focus {
+    background-color: rgb(197, 195, 199);
+  }
+input[type=text]:focus {
+    background-color: rgb(197, 195, 199);
+  }
+input[type=button], input[type=submit], input[type=reset] {
+    background-color: #270e49;
+    border: none;
+    color: white;
+    border-radius:4px;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+input[type="datetime-local"] {
+    width: 80%;
+    border-radius:4px;
+    padding: 16px 32px;
+    text-decoration: none;
+    border: 2px solid #ccc;
+    margin: 4px 2px;
+    cursor: pointer;
+    /* More styles here */
+}
+/* For Mobile */
+@media screen and (max-width: 540px) {
+    .view {
+        width: 400px;
+    }
+}
+
+/* For Tablets */
+@media screen and (min-width: 540px) and (max-width: 780px) {
+    .view {
+        width: 600px;
+    }
+}

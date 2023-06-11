@@ -1,0 +1,54 @@
+{% extends 'base.html' %} 
+
+<!DOCTYPE html>
+
+{% block content %}
+<h2 class="thick">
+    Add Fake Money
+</h2>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>addMoney</title>
+        <!-- <link rel="stylesheet" href="../static/css/newItem.css"> -->
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/Item.css' %}">
+    </head>
+    <body>
+        <div class="container">
+        <form action="/addMoney" method="post" enctype="multipart/form-data">{% csrf_token %}
+            <center>
+                <table border="0"> 
+                    <tr>
+                        <td><input type="number" class="field" step="0.01" min="0.01" name="added_money" placeholder="Enter amount to be added" required></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center" ><font color="white"><input type="submit" class="btt third" value="Submit"></td>
+                    </tr>
+                </table>
+            </center>
+        </form>
+        </div>
+    </body>
+
+<h2 class="thick">OR </h2>
+<h2 class="thick">Add Real Money</h2>
+<body>
+    
+    <div class="container">  
+    <form action="/addRealMoney" method="post" enctype="multipart/form-data">{% csrf_token %}
+        <center>
+            <table border="0">
+                <tr>
+                    <td><input type="number" class="field" step="any" min="0.000059" name="added_money" placeholder="Enter BTC Worth to be added" required></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center" ><font color="white"><input type="submit" class="btt third" value="Submit"></td>
+                </tr>
+            </table>
+        </center>
+    </form>
+    </div>
+</body>
+
+{% endblock content %}

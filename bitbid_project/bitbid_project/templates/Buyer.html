@@ -1,0 +1,89 @@
+{% extends 'base.html' %} 
+
+<!DOCTYPE html>
+
+
+
+{% block content %}
+<head>
+  <meta charset="UTF-8">
+  <title>Buyer</title>
+  <link rel="stylesheet" href="../static/css/sell.css">
+</head>
+<h2 class="head" align="center">BUYER</h2>
+</br>
+<!--<h4 class="head" id = "active" style="visibility: hidden;">Active</h4>-->
+<div class="row" >
+  {% for item in Items %} 
+  {% if item.status in 'Active' %} 
+  <script>
+    document.getElementById("active").style.visibility = "visible";
+  </script>
+    <div class="column">
+      <div class="card">  
+        <ul class="list-unstyled mb-1-9">
+            {% if item.item_image %}
+            <li class="mb-2 mb-xl-3 display-28">
+                <div class="px-0" alt="Item Image">
+                        <img src = "data:image/png;base64,{{ item.item_image.decode }}" class="rounded img-fluid bitbidimage">
+                </div>
+            </li>
+            {% endif %}
+            <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600" align="left"><b>Item Name: </b>{{item.name}}</div> </li>
+           <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600" align="left"><b>Description:</b> {{item.description}}</div></li>
+            <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600" align="left"><b>Base Amount: </b>{{item.base_amount}}</div></li>
+            <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600" align="left"><b>Increment Amount:</b> {{item.increment_amount}}</div></li>
+            <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600" align="left"><b>Seller: </b>{{item.seller.user.username}}</div></li>
+            {% if item.highest_bidder.user.username %}
+              <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600" align="left"><b>Highest Bidder: </b> {{item.highest_bidder.user.username}}</div></li>
+              <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600" align="left"><b>Highest Bid:</b>  {{item.highest_bid}}</div></li>
+            {% else %}
+              <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600" align="left"><b>Highest Bidder:  -</b> </div></li>
+              <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600" align="left"><b>Highest Bid:  - </b></div></li>
+            {%endif%}
+            <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600" align="left"><b>Start Date: </b>{{item.start_date}}</div></li>
+            <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600" align="left"><b>End Date:</b> {{item.end_date}}</div></li>
+            <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600" align="center"><b> {{item.status}}</b></div></li>
+            <a href='/item/{{item.id}}'><button class="bid">Bid </button></a> 
+        </ul>
+    </div>
+  </div> 
+  {%endif%}
+  {% endfor %}
+</div>
+</br>
+<h3 class="head" id = "comingsoon" style="visibility: hidden;">Coming Soon ...</h3>
+<div class="row" >
+  {% for item in Items %} 
+  {% if item.status in 'Yet to open' %} 
+    <script>
+      document.getElementById("comingsoon").style.visibility = "visible";
+    </script>
+    <div class="column">
+      <div class="card">  
+        <ul class="list-unstyled mb-1-9">
+            {% if item.item_image %}
+            <li class="mb-2 mb-xl-3 display-28">
+                <div class="px-0" alt="Item Image">
+                        <img src = "data:image/png;base64,{{ item.item_image.decode }}" class="rounded img-fluid bitbidimage">
+                </div>
+            </li>
+            {% endif %}
+            <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600" align="left"><b>Item Name: </b>  {{item.name}}</div></li>
+           <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600" align="left"><b>Description: </b> {{item.description}}</div></li>
+            <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600" align="left"><b>Base Amount: </b> {{item.base_amount}}</div></li>
+            <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600" align="left"><b>Increment Amount: </b> {{item.increment_amount}}</div></li>
+            <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600" align="left"><b>Seller: </b> {{item.seller.user.username}}</div></li>
+            <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600" align="left"><b>Start Date: </b>{{item.start_date}}</div></li>
+            <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600" align="left"><b>End Date:</b> {{item.end_date}}</div></li>
+            <li class="mb-2 mb-xl-3 display-28"><div class="display-26 text-secondary me-2 font-weight-600" align="center"><b>  {{item.status}}</b></div></li>
+        </ul>
+        {% comment %} <a href='/item/{{item.id}}'><button>Bid </button></a> {% endcomment %} 
+        
+      </div>
+    </div>
+  {%endif%}
+  {% endfor %}
+</div> 
+
+{% endblock content %}

@@ -1,0 +1,105 @@
+{% extends 'base.html' %} 
+
+<!DOCTYPE html>
+
+{% block content %}
+<br/>
+<h2 class="thick">SELLER</h2>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>AddItem</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/Item.css' %}">
+    </head>
+    <body>
+        <div class="container">
+        <form action="/newItem" method="post" enctype="multipart/form-data">{% csrf_token %}
+            <center>
+            <table border="0" id="items" align="center"> 
+                <tr>
+                    <td><input type="text" class="field" name="name" placeholder="Enter item name" required></td>
+                </tr>
+                <tr>
+                    
+                    <td><div style="color: rgb(82, 80, 80);padding:5px">Item Image</div>
+                        <input type="file" class="field" name="item_image" accept="image/*">
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td><textarea rows="5" cols="50" maxlength=140 class="field" name="description" placeholder="Enter Description"></textarea></td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="number" class="field" step="0.01" min="0.01" name="item_value" placeholder="Enter item value" required>
+                    </td>
+                </tr>
+               
+                <tr>
+                    <td>
+                        <input type="number" class="field" step="0.01" min="0.01" name="base_amount" placeholder="Enter base price" required>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+
+                        <input type="number" step="0.01" min="0.01" class="field" name="increment_amount" placeholder="Enter Increment Amount" required>
+                    </td>
+                </tr>
+               
+                <tr>
+                    <td>
+                        <input type="datetime-local" name="start_date"  class="field" oninput="set_min_max_end_auction_date(this.value)" required>  
+                       <script>
+                             var today = new Date(new Date().getTime() - 360*60*1000).toISOString().slice(0, 16);
+                            document.getElementsByName("start_date")[0].min = today;
+                        </script>
+                    </td>
+                </tr>
+               
+                <tr>
+
+                    <td>
+                        <input type="datetime-local" name="end_date"  class="field" required>
+                        <script>
+                            function set_min_max_end_auction_date(auction_start_date, horizon_min_hrs=-6, horizon_max_hrs=66)
+                            {
+                                 end_date_min = new Date(auction_start_date)
+                                 end_date_min.setHours(end_date_min.getHours() + horizon_min_hrs);
+                                 end_date_min = end_date_min.toISOString().slice(0, 16);
+                                 document.getElementsByName("end_date")[0].min = end_date_min;
+                                
+                                 end_date_max = new Date(auction_start_date);
+                                 end_date_max.setHours(end_date_max.getHours() + horizon_max_hrs);
+                                 end_date_max = end_date_max.toISOString().slice(0, 16);
+                                document.getElementsByName("end_date")[0].max = end_date_max;
+                            }
+                        </script>
+                    </td>
+                </tr>
+                
+                
+                <tr>
+					<td colspan="2" align="center" ><font color="white"><input type="submit" class="btt third" value="Upload"></td>
+                </tr>
+                <tr>
+                    <td height="60px"></td>
+                    <td height="60px"></td>
+                </tr>
+            </form>
+                <!-- <tr>
+                    <td>{% for m in messages %}
+                        <center><font color="red"><h2>{{m}}</h2></font></center>
+                    {% endfor %}</td>
+                    <td></td>
+                </tr> -->
+            </table>
+        
+        </center>
+    </div>
+    </body>
+    {% endblock content %}
