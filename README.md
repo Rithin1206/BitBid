@@ -59,5 +59,3 @@ CSCE 606 - BitBid - Team 3GB
     *   Github workflows has been setup for this repository to deploy to heroku using `HEROKU_API_KEY` secret
     * If you want a new build out, push your code to `/release/**` branch and a new build will be triggered :)
     * You can check the status of the build under the `Actions` tab
-
-TODO: Decouple build and deploy into seperate workflows. Push images into opensource and **free** container registry like Nexus etc.
